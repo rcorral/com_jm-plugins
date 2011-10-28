@@ -37,13 +37,8 @@ if [ -L $SITE_PATH/plugins/api ]; then
 	rm -rf $SITE_PATH/plugins/api
 fi
 
-if [ -L $SITE_PATH/plugins/system/api ]; then
-	echo "Deleting old plugins system api directory"
-	rm -rf $SITE_PATH/plugins/system/api
-fi
-
 # Delete old admin language files
-adminlangs=( plg_api_api plg_api_categories plg_api_content plg_api_core plg_api_language plg_api_menus plg_api_users plg_system_api )
+adminlangs=( plg_api_api plg_api_categories plg_api_content plg_api_core plg_api_language plg_api_menus plg_api_users )
 for lang in ${adminlangs[@]}
 	do
 	if [ -L $SITE_PATH/administrator/language/en-GB/en-GB.$lang.ini ]; then
@@ -58,7 +53,6 @@ done
 
 ln -s $CODE_PATH/administrator/language/en-GB/* $SITE_PATH/administrator/language/en-GB/
 ln -s $CODE_PATH/plugins/api $SITE_PATH/plugins/
-ln -s $CODE_PATH/plugins/system/api $SITE_PATH/plugins/system/
 
 echo "Links created successfully"
 exit

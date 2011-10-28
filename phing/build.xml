@@ -5,13 +5,8 @@
 	<property name="component.path" value="../../com_api/code/" />
 	<property name="component.admin_path" value="${component.path}administrator/components/${component.name}" />
 	<property name="component.admin_languages" value="${component.path}administrator/language/en-GB" />
+	<property name="plugins.admin_languages" value="administrator/language/en-GB" />
 	<property name="component.site_path" value="${component.path}components/${component.name}" />
-	<property name="component.site_language" value="${component.path}language/en-GB/en-GB.${component.name}.ini" />
-	<property name="component.admin_language"
-		value="${component.admin_languages}/en-GB.${component.name}.ini" />
-	<property name="component.admin_language_sys"
-		value="${component.admin_languages}/en-GB.${component.name}.sys.ini" />
-	<property name="component.plugins_path" value="plugins" />
 
 	<property name="zip.path" value="../phing/packages" />
 	<property name="package.path" value="${zip.path}/${component.name}" />
@@ -60,17 +55,17 @@
 		</copy>
 
 		<!-- languages -->
-		<copy file="${component.admin_language}" todir="${package.path}/admin/language/en-GB"/>
-		<copy file="${component.admin_language_sys}" todir="${package.path}/admin/language/en-GB"/>
-		<copy file="${component.site_language}" todir="${package.path}/site/language/en-GB"/>
+		<copy file="${component.admin_languages}/en-GB.${component.name}.ini" todir="${package.path}/admin/language/en-GB"/>
+		<copy file="${component.admin_languages}/en-GB.${component.name}.sys.ini" todir="${package.path}/admin/language/en-GB"/>
+		<copy file="${component.path}language/en-GB/en-GB.${component.name}.ini" todir="${package.path}/site/language/en-GB"/>
 
 		<!-- root files -->
 		<copy file="${component.admin_path}/script.php" todir="${package.path}"/>
 		<copy file="${component.admin_path}/${component.short}.xml" todir="${package.path}"/>
 
-		<!-- plugins -->
+		<!-- copy api plugins -->
 		<copy todir="${package.path}/admin/extensions/plugins">
-			<fileset dir="${component.plugins_path}" />
+			<fileset dir="plugins" />
 		</copy>
 		<!-- loop through plugins and and add the language files. uses plugin_folder -->
 		<foreach param="plg_path" absparam="plg_abs_path" target="plugins_folder">
@@ -80,6 +75,13 @@
 			</fileset>
 		</foreach>
 
+		<!-- copy system plugin -->
+		<copy todir="${package.path}/admin/extensions/plugins/system">
+			<fileset dir="${component.path}plugins/system" />
+		</copy>
+		<copy file="${component.admin_languages}/en-GB.plg_system_api.ini" todir="${package.path}/admin/extensions/plugins/system/api/language/en-GB" />
+		<copy file="${component.admin_languages}/en-GB.plg_system_api.sys.ini" todir="${package.path}/admin/extensions/plugins/system/api/language/en-GB" />
+
 		<zip destfile="${zip.path}/${package.name}" basedir="${package.path}" />
 	</target>
 
@@ -87,7 +89,7 @@
 	<target name="plugins_folder">
 		<echo msg="${plg_abs_path}" />
 		<php expression="str_replace('/', '_', '${plg_path}');" returnProperty="plg_lang_name" />
-		<copy file="${component.admin_languages}/en-GB.plg_${plg_lang_name}.ini" todir="${plg_abs_path}/language/en-GB" />
-		<copy file="${component.admin_languages}/en-GB.plg_${plg_lang_name}.sys.ini" todir="${plg_abs_path}/language/en-GB" />
+		<copy file="${plugins.admin_languages}/en-GB.plg_${plg_lang_name}.ini" todir="${plg_abs_path}/language/en-GB" />
+		<copy file="${plugins.admin_languages}/en-GB.plg_${plg_lang_name}.sys.ini" todir="${plg_abs_path}/language/en-GB" />
 	</target>
 </project>
