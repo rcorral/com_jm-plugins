@@ -46,15 +46,19 @@ class ContentApiResourceArticleslist extends ApiResource
 
 			switch ( $row->access ) {
 				case 1:
-					$row->access = JText::_( 'COM_API_ACCESS_REGISTERED' );
+					$row->access = JText::_( 'COM_API_ACCESS_PUBLIC' );
 					break;
 
 				case 2:
+					$row->access = JText::_( 'COM_API_ACCESS_REGISTERED' );
+					break;
+
+				case 3:
 					$row->access = JText::_( 'COM_API_ACCESS_SPECIAL' );
 					break;
 
 				default:
-					$row->access = JText::_( 'COM_API_ACCESS_PUBLIC' );
+					$row->access = JText::_( 'COM_API_ACCESS_OTHER' );
 					break;
 			}
 
