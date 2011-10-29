@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension version="1.7" type="plugin" group="api" method="upgrade">
 	<name>plg_api_content</name>
-	<version>1.0</version>
+	<version>1.0.1</version>
 	<creationDate>November 2010</creationDate>
 	<author>Brian Edgerton</author>
 	<authorEmail>brian@edgewebworks.com</authorEmail>
