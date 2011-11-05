@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="1.7" type="plugin" group="api" method="upgrade">
+	<name>plg_api_k2</name>
+	<version>1.0</version>
+	<creationDate>November 2011</creationDate>
+	<author>Rafael Corral</author>
+	<authorEmail>rxcorral@gmail.com</authorEmail>
+	<authorUrl>http://www.rafaelcorral.com/</authorUrl>
+	<copyright>2011 Rafael Corral</copyright>
+	<license>GNU General Public License v2</license>
+	<description>PLG_API_K2_XML_DESCRIPTION</description>
+
+	<files>
+		<filename plugin="k2">k2.php</filename>
+		<filename>index.html</filename>
+		<folder>resources</folder>
+	</files>
+
+	<languages>
+		<language tag="en-GB">language/en-GB/en-GB.plg_api_k2.ini</language>
+		<language tag="en-GB">language/en-GB/en-GB.plg_api_k2.sys.ini</language>
+	</languages>
+	<params>
+	</params>
+</extension>
