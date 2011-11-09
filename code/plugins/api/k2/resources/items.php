@@ -1,12 +1,12 @@
 <?php
 /**
- * @package	API
- * @version 1.5
- * @author 	Brian Edgerton
- * @link 	http://www.edgewebworks.com
- * @copyright Copyright (C) 2011 Edge Web Works, LLC. All rights reserved.
+ * @package	K2 API plugin
+ * @version 1.0
+ * @author 	Rafael Corral
+ * @link 	http://www.rafaelcorral.com
+ * @copyright Copyright (C) 2011 Rafael Corral. All rights reserved.
  * @license http://www.gnu.org/copyleft/gpl.html GNU/GPL, see LICENSE.php
-*/
+ */
 
 defined('_JEXEC') or die( 'Restricted access' );
 
