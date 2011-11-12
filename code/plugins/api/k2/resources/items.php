@@ -35,9 +35,31 @@ class K2ApiResourceItems extends ApiResource
 		$this->plugin->setResponse( $response );
 	}
 
-	public function post()
+	/**
+	 * This is a modified method from the trash() method in:
+	 * /admin/com_k2/models/items.php
+	 */
+	public function delete()
 	{
-		$this->plugin->setResponse( 'here is a post request' );
+		$db = &JFactory::getDBO();
+		$cid = JRequest::getVar('cid');
+		JArrayHelper::toInteger($cid);
+
+		JTable::addIncludePath( JPATH_ADMINISTRATOR . '/components/com_k2/tables' );
+		$row = &JTable::getInstance('K2Item', 'Table');
+
+		foreach ( $cid as $id ) {
+			$row->load( $id );
+			$row->trash = 1;
+			$row->store();
+		}
+
+		$cache = &JFactory::getCache('com_k2');
+		$cache->clean();
+
+		$response = $this->getSuccessResponse( 200, JText::_('COM_API_SUCCESS') );
+
+		$this->plugin->setResponse( $response );
 	}
 
 	/**

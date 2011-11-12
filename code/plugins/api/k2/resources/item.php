@@ -89,6 +89,8 @@ class K2ApiResourceItem extends ApiResource
 	/**
 	 * This method is copied from admin/com_k2/models/item.php 
 	 * Modifications have been made
+	 * Changed all $mainframe redirects
+	 * Removed the check for extra fields, we don't want to override them
 	 */
 	function save($front = false) {
 
@@ -615,60 +617,6 @@ class K2ApiResourceItem extends ApiResource
 			$row->video = '';
 			$row->video_caption = '';
 			$row->video_credits = '';
-		}
-
-		//Extra fields
-		$objects = array();
-		$variables = JRequest::get('post', 4);
-		foreach ($variables as $key=>$value) {
-			if (( bool )JString::stristr($key, 'K2ExtraField_')) {
-				$object = new JObject;
-				$object->set('id', JString::substr($key, 13));
-				$object->set('value', $value);
-				unset($object->_errors);
-				$objects[] = $object;
-			}
-		}
-
-		$csvFiles = JRequest::get('files');
-		foreach ($csvFiles as $key=>$file) {
-			if (( bool )JString::stristr($key, 'K2ExtraField_')) {
-				$object = new JObject;
-				$object->set('id', JString::substr($key, 13));
-				$csvFile = $file['tmp_name'][0];
-				if(!empty($csvFile) && JFile::getExt($file['name'][0])=='csv'){
-					$handle = @fopen($csvFile, 'r');
-					$csvData=array();
-					while (($data = fgetcsv($handle, 1000)) !== FALSE) {
-						$csvData[]=$data;
-					}
-					fclose($handle);
-					$object->set('value', $csvData);
-				}
-				else {
-					require_once (JPATH_ADMINISTRATOR.'/components/com_k2'.DS.'lib'.DS.'JSON.php');
-					$json = new Services_JSON;
-					$object->set('value', $json->decode(JRequest::getVar('K2CSV_'.$object->id)));
-					if(JRequest::getBool('K2ResetCSV_'.$object->id))
-					$object->set('value', null);
-				}
-				unset($object->_errors);
-				$objects[] = $object;
-			}
-		}
-
-
-		require_once (JPATH_ADMINISTRATOR.'/components/com_k2'.DS.'lib'.DS.'JSON.php');
-		$json = new Services_JSON;
-		$row->extra_fields = $json->encode($objects);
-
-		require_once (JPATH_ADMINISTRATOR.'/components/com_k2'.DS.'models'.DS.'extrafield.php');
-		$extraFieldModel = new K2ModelExtraField;
-		$row->extra_fields_search = '';
-
-		foreach ($objects as $object) {
-			$row->extra_fields_search .= $extraFieldModel->getSearchValue($object->id, $object->value);
-			$row->extra_fields_search .= ' ';
 		}
 
 		//Tags
