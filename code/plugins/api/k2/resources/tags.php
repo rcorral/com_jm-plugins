@@ -18,6 +18,10 @@ class K2ApiResourceTags extends ApiResource
 	{
 		require_once JPATH_ADMINISTRATOR . '/components/com_k2/models/tags.php';
 
+		// Set defaults
+		JRequest::setVar( 'limitstart', 0 );
+		JRequest::setVar( 'limit', 99999 );
+
 		$model = JModel::getInstance( 'tags', 'K2Model' );
 		$tags = $model->getData();
 
