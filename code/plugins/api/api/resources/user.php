@@ -1,6 +1,6 @@
 <?php
 /**
- * @package	API
+ * @package	JM
  * @version 1.5
  * @author 	Brian Edgerton
  * @link 	http://www.edgewebworks.com
@@ -22,7 +22,7 @@ class ApiApiResourceUser extends ApiResource
 		jimport( 'joomla.application.helper' );
 
 		// Set variables to be used
-		APIHelper::setSessionUser();
+		JMHelper::setSessionUser();
 
 		$user = JFactory::getUser();
 

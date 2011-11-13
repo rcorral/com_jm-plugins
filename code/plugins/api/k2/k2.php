@@ -1,6 +1,6 @@
 <?php
 /**
- * @package	API
+ * @package	JM
  * @version 1.5
  * @author 	Rafael Corral
  * @link 	http://www.rafaelcorral.com/
@@ -12,14 +12,14 @@ defined('_JEXEC') or die( 'Restricted access' );
 
 jimport('joomla.plugin.plugin');
 
-class plgAPIK2 extends ApiPlugin
+class plgJMK2 extends ApiPlugin
 {
 	public function __construct( &$subject, $config )
 	{
 		parent::__construct( $subject, $config );
 		$this->loadLanguage();
 
-		ApiResource::addIncludePath( JPATH_PLUGINS . '/api/k2/resources' );
+		ApiResource::addIncludePath( JPATH_PLUGINS . '/jm/k2/resources' );
 	}
 
 	public function register_api_plugin()

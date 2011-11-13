@@ -1,6 +1,6 @@
 <?php
 /**
- * @package	API
+ * @package	JM
  * @version 1.5
  * @author 	Brian Edgerton
  * @link 	http://www.edgewebworks.com
@@ -17,7 +17,7 @@ class UsersApiResourceUsers extends ApiResource
 	public function get()
 	{
 		require_once JPATH_ADMINISTRATOR.'/components/com_users/models/users.php';
-		require_once JPATH_PLUGINS.'/api/users/resources/helper.php';
+		require_once JPATH_PLUGINS.'/jm/users/resources/helper.php';
 
 		$model = JModel::getInstance('ApiHelperModel', 'UsersModel');
 		$model->_setCache('getstart', $model->getState('list.start'));

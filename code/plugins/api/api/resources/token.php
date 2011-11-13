@@ -1,6 +1,6 @@
 <?php
 /**
- * @package	API
+ * @package	JM
  * @version 1.5
  * @author 	Brian Edgerton
  * @link 	http://www.edgewebworks.com
@@ -13,7 +13,7 @@ defined('_JEXEC') or die( 'Restricted access' );
 jimport('joomla.plugin.plugin');
 
 /**
- * Class to get the API's version
+ * Class to get the JM's version
  */
 class ApiApiResourceToken extends ApiResource
 {
@@ -21,7 +21,7 @@ class ApiApiResourceToken extends ApiResource
 	{
 		parent::__construct( $plugin );
 
-		$auth_handler = APIAuthentication::getInstance('user');
+		$auth_handler = JMAuthentication::getInstance('user');
 		$user_id = $auth_handler->authenticate();
 		if ( false === $user_id ) {
 			throw new Exception( $auth_handler->getError(), 403 );
@@ -40,17 +40,17 @@ class ApiApiResourceToken extends ApiResource
 		$db = JFactory::getDBO();
 		$return_status = 200;
 		$user_id = $this->plugin->get('user');
-		APIHelper::setSessionUser($user_id);
+		JMHelper::setSessionUser($user_id);
 		$error_code = 404;
 		$error_response = JText::_('COM_JM_KEY_NOT_FOUND');
 
 		// Load users token
-		$db->setQuery( "SELECT * FROM #__api_keys WHERE user_id = " . (int) $user_id );
+		$db->setQuery( "SELECT * FROM #__jm_keys WHERE user_id = " . (int) $user_id );
 		$token = $db->loadObject();
 
 		// Check to see if we are forcing a token no matter what
 		if ( JRequest::getInt('force') && ( !$token || !$token->published ) ) {
-			$canDo = APIHelper::getActions();
+			$canDo = JMHelper::getActions();
 			// Make sure that this user is allowed to create new keys
 			if ( $canDo->get('core.manage') ) {
 				// Create new token

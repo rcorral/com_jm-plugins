@@ -1,6 +1,6 @@
 <?php
 /**
- * @package	API
+ * @package	JM
  * @version 1.5
  * @author 	Brian Edgerton
  * @link 	http://www.edgewebworks.com
@@ -15,7 +15,7 @@ jimport('joomla.plugin.plugin');
 class CoreApiResourceCategoryParent extends ApiResource
 {
 	/**
-	 * A copy with modifications for the api from the categoryparent.php
+	 * A copy with modifications for the jm from the categoryparent.php
 	 * field on the categories component
 	 */
 	public function get()
@@ -74,7 +74,7 @@ class CoreApiResourceCategoryParent extends ApiResource
 		}
 
 		// Initialise variables.
-		$user = JFactory::getUser( APIHelper::getAPIUserId() );
+		$user = JFactory::getUser( JMHelper::getJMUserId() );
 
 		if (empty($id)) {
 			// New item, only have to check core.create.

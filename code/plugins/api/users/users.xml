@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<extension version="1.7" type="plugin" group="api" method="upgrade">
+<extension version="1.7" type="plugin" group="jm" method="upgrade">
 	<name>plg_jm_users</name>
 	<version>1.0</version>
 	<creationDate>August 2011</creationDate>

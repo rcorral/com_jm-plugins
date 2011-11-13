@@ -1,6 +1,6 @@
 <?php
 /**
- * @package	API
+ * @package	JM
  * @version 1.5
  * @author 	Brian Edgerton
  * @link 	http://www.edgewebworks.com
@@ -19,7 +19,7 @@ class MenusApiResourceMenuItems extends ApiResource
 		ApiHelper::setSessionUser();
 
 		require_once JPATH_ADMINISTRATOR.'/components/com_menus/models/items.php';
-		require_once JPATH_PLUGINS.'/api/menus/resources/helper.php';
+		require_once JPATH_PLUGINS.'/jm/menus/resources/helper.php';
 
 		$model = JModel::getInstance('ApiHelperModel', 'MenuItemsModel');
 		$model->_setCache('getstart', $model->getState('list.start'));

@@ -1,6 +1,6 @@
 <?php
 /**
- * @package	API
+ * @package	JM
  * @version 1.5
  * @author 	Brian Edgerton
  * @link 	http://www.edgewebworks.com
@@ -20,7 +20,7 @@ class CategoriesApiResourceCategories extends ApiResource
 		ApiHelper::setSessionUser();
 
 		require_once JPATH_ADMINISTRATOR.'/components/com_categories/models/categories.php';
-		require_once JPATH_PLUGINS.'/api/categories/resources/helper.php';
+		require_once JPATH_PLUGINS.'/jm/categories/resources/helper.php';
 
 		$model = JModel::getInstance('ApiHelperModel', 'CategoriesModel');
 		$model->_setCache('getstart', $model->getState('list.start'));

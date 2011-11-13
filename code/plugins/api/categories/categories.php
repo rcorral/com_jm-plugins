@@ -1,6 +1,6 @@
 <?php
 /**
- * @package	API
+ * @package	JM
  * @version 1.5
  * @author 	Brian Edgerton
  * @link 	http://www.edgewebworks.com
@@ -12,13 +12,13 @@ defined('_JEXEC') or die( 'Restricted access' );
 
 jimport('joomla.plugin.plugin');
 
-class plgAPICategories extends ApiPlugin
+class plgJMCategories extends ApiPlugin
 {
 	public function __construct( &$subject, $config )
 	{
 		parent::__construct( $subject, $config );
 		$this->loadLanguage();
 
-		ApiResource::addIncludePath( JPATH_PLUGINS .DS. 'api' .DS. 'categories' .DS. 'resources' );
+		ApiResource::addIncludePath( JPATH_PLUGINS .DS. 'jm' .DS. 'categories' .DS. 'resources' );
 	}
 }

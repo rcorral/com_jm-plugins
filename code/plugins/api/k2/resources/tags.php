@@ -1,6 +1,6 @@
 <?php
 /**
- * @package	K2 API plugin
+ * @package	K2 JM plugin
  * @version 1.0
  * @author 	Rafael Corral
  * @link 	http://www.rafaelcorral.com

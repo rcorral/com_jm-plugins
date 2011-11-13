@@ -1,6 +1,6 @@
 <?php
 /**
- * @package	API
+ * @package	JM
  * @version 1.5
  * @author 	Brian Edgerton
  * @link 	http://www.edgewebworks.com
@@ -25,7 +25,7 @@ class MenusApiResourceMenuItem extends ApiResource
 	public function post()
 	{
 		// Set variables to be used
-		APIHelper::setSessionUser();
+		JMHelper::setSessionUser();
 		$language = JFactory::getLanguage();
 		$language->load('joomla', JPATH_ADMINISTRATOR);
 		$language->load('com_menus', JPATH_ADMINISTRATOR);

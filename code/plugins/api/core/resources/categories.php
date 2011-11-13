@@ -1,6 +1,6 @@
 <?php
 /**
- * @package	API
+ * @package	JM
  * @version 1.5
  * @author 	Brian Edgerton
  * @link 	http://www.edgewebworks.com
@@ -26,7 +26,7 @@ class CoreApiResourceCategories extends ApiResource
 		$action	= 'core.edit.own';
 
 		// Get the current user object.
-		$user = JFactory::getUser( APIHelper::getAPIUserId() );
+		$user = JFactory::getUser( JMHelper::getJMUserId() );
 
 		foreach( $categories as $i => $cat ) {
 			// To take save or create in a category you need to have create rights for that category

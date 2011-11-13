@@ -1,6 +1,6 @@
 <?php
 /**
- * @package	API
+ * @package	JM
  * @version 1.5
  * @author 	Brian Edgerton
  * @link 	http://www.edgewebworks.com
@@ -13,7 +13,7 @@ defined('_JEXEC') or die( 'Restricted access' );
 jimport('joomla.plugin.plugin');
 
 /**
- * Class to get the API's version
+ * Class to get the JM's version
  */
 class ApiApiResourceVersion extends ApiResource
 {
@@ -21,7 +21,7 @@ class ApiApiResourceVersion extends ApiResource
 	{
 		jimport( 'joomla.application.helper' );
 
-		$xml = JApplicationHelper::parseXMLInstallFile( JPATH_COMPONENT_ADMINISTRATOR.'/api.xml' );
+		$xml = JApplicationHelper::parseXMLInstallFile( JPATH_COMPONENT_ADMINISTRATOR.'/jm.xml' );
 
 		if ( false == $xml ) {
 			$response = $this->getErrorResponse( 400, JText::_('COM_JM_UNEXPECTED_ERROR') );

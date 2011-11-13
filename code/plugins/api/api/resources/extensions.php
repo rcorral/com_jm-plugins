@@ -1,6 +1,6 @@
 <?php
 /**
- * @package	API
+ * @package	JM
  * @version 1.5
  * @author 	Rafael Corral
  * @link 	http://www.rafaelcorral.com
@@ -19,9 +19,9 @@ class ApiApiResourceExtensions extends ApiResource
 		$app = JFactory::getApplication();
 
 		jimport('joomla.filesystem.folder');
-		JPluginHelper::importPlugin('api');
+		JPluginHelper::importPlugin('jm');
 
-		$result = $app->triggerEvent( 'register_api_plugin' );
+		$result = $app->triggerEvent( 'register_jm_plugin' );
 
 		$plugins = array();
 		foreach ( $result as $plugin ) {
@@ -29,7 +29,7 @@ class ApiApiResourceExtensions extends ApiResource
 				continue;
 			}
 
-			$path = JFolder::makeSafe( JPATH_ROOT . "/plugins/api/{$plugin->plugin}/html" );
+			$path = JFolder::makeSafe( JPATH_ROOT . "/plugins/jm/{$plugin->plugin}/html" );
 			if ( !JFolder::exists( $path ) ) {
 				continue;
 			}
