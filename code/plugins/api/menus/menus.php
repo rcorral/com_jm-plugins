@@ -14,9 +14,9 @@ jimport('joomla.plugin.plugin');
 
 class plgAPIMenus extends ApiPlugin
 {
-	public function __construct()
+	public function __construct( &$subject, $config )
 	{
-		parent::__construct();
+		parent::__construct( $subject, $config );
 		$this->loadLanguage();
 
 		ApiResource::addIncludePath( JPATH_PLUGINS .DS. 'api' .DS. 'menus' .DS. 'resources' );
