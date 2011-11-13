@@ -35,7 +35,7 @@ class ContentApiResourceArticleslist extends ApiResource
 			$query .= " AND c.`catid` = {$categoryid}";
 		}
 
-		$query .= " ORDER BY c.`title` LIMIT {$limitstart}, {$limit}";
+		$query .= " ORDER BY c.`id` DESC LIMIT {$limitstart}, {$limit}";
 
 		$db->setQuery( $query );
 		$articles = $db->loadObjectList();

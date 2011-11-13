@@ -12,6 +12,7 @@
 
 	<files>
 		<filename plugin="menus">menus.php</filename>
+		<filename>index.html</filename>
 		<folder>resources</folder>
 	</files>
 

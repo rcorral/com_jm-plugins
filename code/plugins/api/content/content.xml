@@ -12,6 +12,7 @@
 
 	<files>
 		<filename plugin="content">content.php</filename>
+		<filename>index.html</filename>
 		<folder>resources</folder>
 	</files>
 
