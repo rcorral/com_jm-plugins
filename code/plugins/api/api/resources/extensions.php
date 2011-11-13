@@ -49,6 +49,8 @@ class ApiApiResourceExtensions extends ApiResource
 				);
 		}
 
+		ksort( $plugins );
+
 		$this->plugin->setResponse( $plugins );
 	}
 }
