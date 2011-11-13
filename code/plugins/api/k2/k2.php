@@ -14,11 +14,19 @@ jimport('joomla.plugin.plugin');
 
 class plgAPIK2 extends ApiPlugin
 {
-	public function __construct()
+	public function __construct( &$subject, $config )
 	{
-		parent::__construct();
+		parent::__construct( $subject, $config );
 		$this->loadLanguage();
 
 		ApiResource::addIncludePath( JPATH_PLUGINS . '/api/k2/resources' );
+	}
+
+	public function register_api_plugin()
+	{
+		return parent::register_api_plugin( array(
+			// Title as you want it to appear on the extensions list
+			'title' => 'K2'
+			));
 	}
 }
