@@ -57,7 +57,7 @@ class K2ApiResourceItems extends ApiResource
 		$cache = &JFactory::getCache('com_k2');
 		$cache->clean();
 
-		$response = $this->getSuccessResponse( 200, JText::_('COM_API_SUCCESS') );
+		$response = $this->getSuccessResponse( 200, JText::_('COM_JM_SUCCESS') );
 
 		$this->plugin->setResponse( $response );
 	}

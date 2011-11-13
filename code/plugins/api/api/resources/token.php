@@ -42,7 +42,7 @@ class ApiApiResourceToken extends ApiResource
 		$user_id = $this->plugin->get('user');
 		APIHelper::setSessionUser($user_id);
 		$error_code = 404;
-		$error_response = JText::_('COM_API_KEY_NOT_FOUND');
+		$error_response = JText::_('COM_JM_KEY_NOT_FOUND');
 
 		// Load users token
 		$db->setQuery( "SELECT * FROM #__api_keys WHERE user_id = " . (int) $user_id );
@@ -71,16 +71,16 @@ class ApiApiResourceToken extends ApiResource
 				}
 			} else {
 				$error_code = 401;
-				$error_response = JText::_('COM_API_KEY_CREATE_UNAUTORIZED');
+				$error_response = JText::_('COM_JM_KEY_CREATE_UNAUTORIZED');
 			}
 		}
 
 		if ( !$token ) {
 			$response = $this->getErrorResponse( $error_code, $error_response );
 		} elseif ( !$token->published ) {
-			$response = $this->getErrorResponse( 404, JText::_('COM_API_KEY_DISABLED') );
+			$response = $this->getErrorResponse( 404, JText::_('COM_JM_KEY_DISABLED') );
 		} else {
-			$response = $this->getSuccessResponse( $return_status, JText::_('COM_API_SUCCESS') );
+			$response = $this->getSuccessResponse( $return_status, JText::_('COM_JM_SUCCESS') );
 			$response->token = $token->hash;
 		}
 

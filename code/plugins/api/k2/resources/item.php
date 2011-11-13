@@ -63,9 +63,9 @@ class K2ApiResourceItem extends ApiResource
 		if ( $this->getError() ) {
 			$response = $this->getErrorResponse( 400, $this->getError() );
 		} elseif ( !$row->id ) {
-			$response = $this->getErrorResponse( 400, JText::_('COM_API_ERROR_OCURRED') );
+			$response = $this->getErrorResponse( 400, JText::_('COM_JM_ERROR_OCURRED') );
 		} else {
-			$response = $this->getSuccessResponse( 201, JText::_('COM_API_SUCCESS') );
+			$response = $this->getSuccessResponse( 201, JText::_('COM_JM_SUCCESS') );
 			// Get the ID of the category that was modified or inserted
 			$response->id = $row->id;
 		}

@@ -41,24 +41,24 @@ class ContentApiResourceArticleslist extends ApiResource
 		$articles = $db->loadObjectList();
 
 		foreach ( $articles as &$row ) {
-			$row->state = ( $row->state ) ? JText::_( 'COM_API_PUBLISHED' )
-				: JText::_( 'COM_API_UNPUBLISHED' );
+			$row->state = ( $row->state ) ? JText::_( 'COM_JM_PUBLISHED' )
+				: JText::_( 'COM_JM_UNPUBLISHED' );
 
 			switch ( $row->access ) {
 				case 1:
-					$row->access = JText::_( 'COM_API_ACCESS_PUBLIC' );
+					$row->access = JText::_( 'COM_JM_ACCESS_PUBLIC' );
 					break;
 
 				case 2:
-					$row->access = JText::_( 'COM_API_ACCESS_REGISTERED' );
+					$row->access = JText::_( 'COM_JM_ACCESS_REGISTERED' );
 					break;
 
 				case 3:
-					$row->access = JText::_( 'COM_API_ACCESS_SPECIAL' );
+					$row->access = JText::_( 'COM_JM_ACCESS_SPECIAL' );
 					break;
 
 				default:
-					$row->access = JText::_( 'COM_API_ACCESS_OTHER' );
+					$row->access = JText::_( 'COM_JM_ACCESS_OTHER' );
 					break;
 			}
 

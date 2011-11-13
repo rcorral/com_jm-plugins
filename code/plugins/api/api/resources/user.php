@@ -27,7 +27,7 @@ class ApiApiResourceUser extends ApiResource
 		$user = JFactory::getUser();
 
 		// Response is always successfull if we gotten this far! yippy!
-		$response = $this->getSuccessResponse( 200, JText::_('COM_API_SUCCESS') );
+		$response = $this->getSuccessResponse( 200, JText::_('COM_JM_SUCCESS') );
 		$response->user = (object) array(
 			'id' => $user->id,
 			'name' => $user->name,

@@ -55,7 +55,7 @@ class MenusApiResourceMenuItem extends ApiResource
 		if ( $controller->getError() ) {
 			$response = $this->getErrorResponse( 400, $controller->getError() );
 		} elseif ( false === $success ) {
-			$response = $this->getErrorResponse( 400, JText::_('COM_API_ERROR_OCURRED') );
+			$response = $this->getErrorResponse( 400, JText::_('COM_JM_ERROR_OCURRED') );
 		} else {
 			$response = $this->getSuccessResponse( 201, $controller->get('message') );
 			// Kind of a weird way of doing this, there has to be a better way?
