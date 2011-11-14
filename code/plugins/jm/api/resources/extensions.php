@@ -21,7 +21,7 @@ class APIJMResourceExtensions extends JMResource
 		jimport('joomla.filesystem.folder');
 		JPluginHelper::importPlugin('jm');
 
-		$result = $app->triggerEvent( 'register_jm_plugin' );
+		$result = $app->triggerEvent( 'register_api_plugin' );
 
 		$plugins = array();
 		foreach ( $result as $plugin ) {

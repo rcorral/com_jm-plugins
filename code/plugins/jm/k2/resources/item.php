@@ -636,6 +636,9 @@ class K2JMResourceItem extends JMResource
 			if (count($tags)) {
 				$tags = array_unique($tags);
 				foreach ($tags as $tag) {
+					if ( empty( $tag ) ) {
+						continue;
+					}
 					$tag = str_replace('-','',$tag);
 					$query = "SELECT id FROM #__k2_tags WHERE name=".$db->Quote($tag);
 					$db->setQuery($query);
