@@ -12,16 +12,16 @@ defined('_JEXEC') or die( 'Restricted access' );
 
 jimport('joomla.plugin.plugin');
 
-class MenusApiResourceMenuItems extends ApiResource
+class MenusJMResourceMenuItems extends JMResource
 {
 	public function get()
 	{
-		ApiHelper::setSessionUser();
+		JMHelper::setSessionUser();
 
 		require_once JPATH_ADMINISTRATOR.'/components/com_menus/models/items.php';
 		require_once JPATH_PLUGINS.'/jm/menus/resources/helper.php';
 
-		$model = JModel::getInstance('ApiHelperModel', 'MenuItemsModel');
+		$model = JModel::getInstance('JMHelperModel', 'MenuItemsModel');
 		$model->_setCache('getstart', $model->getState('list.start'));
 		$menuitems = $model->getItems();
 

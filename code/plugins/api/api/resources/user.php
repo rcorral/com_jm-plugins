@@ -15,7 +15,7 @@ jimport('joomla.plugin.plugin');
 /**
  * Class to get the users information
  */
-class ApiApiResourceUser extends ApiResource
+class APIJMResourceUser extends JMResource
 {
 	public function get()
 	{

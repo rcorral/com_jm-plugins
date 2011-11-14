@@ -15,7 +15,7 @@ jimport('joomla.plugin.plugin');
 /**
  * Class to get the JM's version
  */
-class ApiApiResourceVersion extends ApiResource
+class APIJMResourceVersion extends JMResource
 {
 	public function get()
 	{

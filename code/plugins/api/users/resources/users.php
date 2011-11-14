@@ -12,14 +12,14 @@ defined('_JEXEC') or die( 'Restricted access' );
 
 jimport('joomla.plugin.plugin');
 
-class UsersApiResourceUsers extends ApiResource
+class UsersJMResourceUsers extends JMResource
 {
 	public function get()
 	{
 		require_once JPATH_ADMINISTRATOR.'/components/com_users/models/users.php';
 		require_once JPATH_PLUGINS.'/jm/users/resources/helper.php';
 
-		$model = JModel::getInstance('ApiHelperModel', 'UsersModel');
+		$model = JModel::getInstance('JMHelperModel', 'UsersModel');
 		$model->_setCache('getstart', $model->getState('list.start'));
 		$users = $model->getItems();
 

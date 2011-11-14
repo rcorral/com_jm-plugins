@@ -12,7 +12,7 @@ defined('_JEXEC') or die( 'Restricted access' );
 
 jimport('joomla.plugin.plugin');
 
-class CoreApiResourceCategories extends ApiResource
+class CoreJMResourceCategories extends JMResource
 {
 	/**
 	 * HTML list ready response

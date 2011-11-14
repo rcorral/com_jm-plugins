@@ -10,7 +10,7 @@
 
 defined('_JEXEC') or die;
 
-class UsersModelApiHelperModel extends UsersModelUsers
+class UsersModelJMHelperModel extends UsersModelUsers
 {
 	function _setCache( $store, $value )
 	{

@@ -10,7 +10,7 @@
 
 defined('_JEXEC') or die();
 
-class CategoriesModelApiHelperModel extends CategoriesModelCategories
+class CategoriesModelJMHelperModel extends CategoriesModelCategories
 {
 	function _setCache( $store, $value )
 	{

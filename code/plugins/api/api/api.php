@@ -12,13 +12,13 @@ defined('_JEXEC') or die( 'Restricted access' );
 
 jimport('joomla.plugin.plugin');
 
-class plgJMAPI extends ApiPlugin
+class plgJMAPI extends JMPlugin
 {
 	public function __construct( &$subject, $config )
 	{
 		parent::__construct( $subject, $config );
 		$this->loadLanguage();
 
-		ApiResource::addIncludePath( JPATH_PLUGINS .DS. 'jm' .DS. 'api' .DS. 'resources' );
+		JMResource::addIncludePath( JPATH_PLUGINS .DS. 'jm' .DS. 'api' .DS. 'resources' );
 	}
 }

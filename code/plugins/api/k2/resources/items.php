@@ -12,12 +12,12 @@ defined('_JEXEC') or die( 'Restricted access' );
 
 jimport('joomla.plugin.plugin');
 
-class K2ApiResourceItems extends ApiResource
+class K2JMResourceItems extends JMResource
 {
 	public function get()
 	{
 		// Set the user doing the request as if they were authenticated in Joomla
-		ApiHelper::setSessionUser();
+		JMHelper::setSessionUser();
 
 		if ( !defined('K2_JVERSION') ) {
 			define( 'K2_JVERSION', '16' );

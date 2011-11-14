@@ -15,9 +15,9 @@ jimport('joomla.plugin.plugin');
 /**
  * Class to get the JM's version
  */
-class ApiApiResourceToken extends ApiResource
+class APIJMResourceToken extends JMResource
 {
-	function __construct( ApiPlugin $plugin )
+	function __construct( JMPlugin $plugin )
 	{
 		parent::__construct( $plugin );
 
@@ -61,7 +61,7 @@ class ApiApiResourceToken extends ApiResource
 					'published' => 1
 				);
 
-				$model = JModel::getInstance('Key', 'ApiModel');
+				$model = JModel::getInstance('Key', 'JMModel');
 				$token = $model->save($data);
 				if ( false === $token ) {
 					$error_code = 500;

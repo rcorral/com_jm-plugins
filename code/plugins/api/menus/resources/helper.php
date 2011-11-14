@@ -11,7 +11,7 @@
 defined('_JEXEC') or die();
 
 if ( class_exists( 'MenusModelItems' ) ) {
-class MenuItemsModelApiHelperModel extends MenusModelItems
+class MenuItemsModelJMHelperModel extends MenusModelItems
 {
 	function _setCache( $store, $value )
 	{
@@ -21,7 +21,7 @@ class MenuItemsModelApiHelperModel extends MenusModelItems
 }
 }
 if ( class_exists( 'MenusModelMenus' ) ) {
-class MenusModelApiHelperModel extends MenusModelMenus
+class MenusModelJMHelperModel extends MenusModelMenus
 {
 	function _setCache( $store, $value )
 	{

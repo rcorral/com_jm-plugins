@@ -12,7 +12,7 @@ defined('_JEXEC') or die;
 
 jimport('joomla.plugin.plugin');
 
-class K2ApiResourceItem extends ApiResource
+class K2JMResourceItem extends JMResource
 {
 	public function get()
 	{

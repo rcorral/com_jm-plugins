@@ -12,17 +12,17 @@ defined('_JEXEC') or die( 'Restricted access' );
 
 jimport('joomla.plugin.plugin');
 
-class CategoriesApiResourceCategories extends ApiResource
+class CategoriesJMResourceCategories extends JMResource
 {
 	public function get()
 	{
 		$extension  = JRequest::getWord( 'extension' );
-		ApiHelper::setSessionUser();
+		JMHelper::setSessionUser();
 
 		require_once JPATH_ADMINISTRATOR.'/components/com_categories/models/categories.php';
 		require_once JPATH_PLUGINS.'/jm/categories/resources/helper.php';
 
-		$model = JModel::getInstance('ApiHelperModel', 'CategoriesModel');
+		$model = JModel::getInstance('JMHelperModel', 'CategoriesModel');
 		$model->_setCache('getstart', $model->getState('list.start'));
 		$categories = $model->getItems();
 

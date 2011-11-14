@@ -12,7 +12,7 @@ defined('_JEXEC') or die( 'Restricted access' );
 
 jimport('joomla.plugin.plugin');
 
-class CoreApiResourceMenuParent extends ApiResource
+class CoreJMResourceMenuParent extends JMResource
 {
 	public function get()
 	{

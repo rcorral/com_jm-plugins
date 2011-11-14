@@ -12,7 +12,7 @@ defined('_JEXEC') or die( 'Restricted access' );
 
 jimport('joomla.plugin.plugin');
 
-class CoreApiResourceCategoryParent extends ApiResource
+class CoreJMResourceCategoryParent extends JMResource
 {
 	/**
 	 * A copy with modifications for the jm from the categoryparent.php
