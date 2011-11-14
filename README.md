@@ -1,16 +1,16 @@
-Joomla! API Plugins - [Uses Joomla! API](https://github.com/rcorral/com_api)
+jomMobile API Plugins - [Uses jomMobile API](https://github.com/rcorral/com_jm)
 ================================
 
 Dependencies
 ------------------------
 * Joomla! 1.7
-* [com_api](https://github.com/rcorral/com_api/tree/1.7) for Joomla 1.7
+* [com_jm](https://github.com/rcorral/com_jm/tree/master) for Joomla 1.7
 
 
 What is it?
 ---------------------------------------
 A repository of Joomla! plugins that rely on the Joomla! API component.
-These plugins are meant to be used as a base start for projects that use com_api as well as examples on how to create plugins for other Joomla! extensions.
+These plugins are meant to be used as a base start for projects that use com_jm as well as examples on how to create plugins for other Joomla! extensions.
 
 Goals
 --------------
@@ -31,7 +31,7 @@ How do I use it?
 There are a few ways you can install this on your site.
 
 **`Phing`**: If you don't have Phing installed, get it *[here](http://phing.info/trac/)*.  
-This script assumes that you have com_api checked out on the parent directory.
+This script assumes that you have com_jm checked out on the parent directory.
 It will create a package of the component with all of the plugins:
 
 	phing -f phing/build.xml
@@ -48,7 +48,6 @@ It will then ask you for the full path to your site root.  You will then need to
 
 Roadmap
 -----------------------------
-- A fully working API Plugin (probably com_content)
 - Plugin SEF URL's
 - Modify phing script to either package all plugins separately or with the component.
 

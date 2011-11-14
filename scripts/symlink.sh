@@ -21,7 +21,7 @@ if [ -z $CODE_PATH ]; then
 		PARENT=$(dirname $CWD)
 		CODE_PATH=$PARENT/code
 		if [ ! -d $CODE_PATH ]; then
-			echo "Could not find code path.  Please enter path to the code directory of the com_api_plugins repository:"
+			echo "Could not find code path.  Please enter path to the code directory of the com_jm-plugins repository:"
 			read CODE_PATH
 			if [ ! -d $CODE_PATH ]; then
 				echo "Path to code not found"
@@ -32,13 +32,13 @@ if [ -z $CODE_PATH ]; then
 fi
 
 # Delete old links and create new symlinks
-if [ -L $SITE_PATH/plugins/api ]; then
-	echo "Deleting old plugins api directory"
-	rm -rf $SITE_PATH/plugins/api
+if [ -L $SITE_PATH/plugins/jm ]; then
+	echo "Deleting old plugins jm directory"
+	rm -rf $SITE_PATH/plugins/jm
 fi
 
 # Delete old admin language files
-adminlangs=( plg_api_api plg_api_categories plg_api_content plg_api_core plg_api_language plg_api_menus plg_api_users )
+adminlangs=( plg_jm_api plg_jm_categories plg_jm_content plg_jm_core plg_jm_language plg_jm_menus plg_jm_users )
 for lang in ${adminlangs[@]}
 	do
 	if [ -L $SITE_PATH/administrator/language/en-GB/en-GB.$lang.ini ]; then
@@ -52,7 +52,7 @@ for lang in ${adminlangs[@]}
 done
 
 ln -s $CODE_PATH/administrator/language/en-GB/* $SITE_PATH/administrator/language/en-GB/
-ln -s $CODE_PATH/plugins/api $SITE_PATH/plugins/
+ln -s $CODE_PATH/plugins/jm $SITE_PATH/plugins/
 
 echo "Links created successfully"
 exit
