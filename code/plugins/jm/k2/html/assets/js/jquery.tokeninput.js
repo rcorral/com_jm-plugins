@@ -311,12 +311,12 @@ $.TokenList = function (input, url_or_data, settings) {
             }
         })
         .focus(function(){
-            input_box.show();
+            input_box.fadeTo('fast', 1);
             token_list.removeClass('ui-shadow-inset');
             token_list.addClass('ui-shadow-inset-ui-focus');
         })
         .blur(function(){
-            input_box.hide();
+            input_box.fadeTo('fast', 0.01);
             token_list.addClass('ui-shadow-inset');
             token_list.removeClass('ui-shadow-inset-ui-focus');
         });
@@ -686,6 +686,7 @@ $.TokenList = function (input, url_or_data, settings) {
                 position: "absolute",
                 top: $(token_list).offset().top + $(token_list).outerHeight(),
                 left: $(token_list).offset().left,
+                width: '61%',
                 zindex: 999
             })
             .show();
