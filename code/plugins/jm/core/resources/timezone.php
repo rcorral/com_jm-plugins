@@ -12,23 +12,25 @@ defined('_JEXEC') or die( 'Restricted access' );
 
 jimport('joomla.plugin.plugin');
 
-class LanguageJMResourceLanguages extends JMResource
+class CoreJMResourceTimezone extends JMResource
 {
 	public function get()
 	{
-		jimport( 'joomla.language.helper' );
+		JMHelper::setSessionUser();
 
-		$client = JRequest::getCmd( 'client', 'site' );
-
-		$languages = JLanguageHelper::createLanguageList(
-			'', constant( 'JPATH_' . strtoupper( $client ) ), true, true );
-
+		$options = array();
 		if ( JRequest::getVar( 'default', false ) ) {
-			array_unshift( $languages,
-				JHtml::_('select.option', 0, JText::_('JOPTION_USE_DEFAULT')) );
+			$options = array(
+				(object) array( 'value' => '', 'text' => JText::_('JOPTION_USE_DEFAULT') ) );
 		}
 
-		$this->plugin->setResponse( $languages );
+		$sites = JMHelper::getField( 'timezone', array(
+			'name' => JRequest::getVar('field_name', ''),
+			'id' => JRequest::getVar('field_id', ''),
+			'_options' => $options
+			));
+
+		$this->plugin->setResponse( array( 'html' => $sites->input ) );
 	}
 
 	public function post()

@@ -200,7 +200,7 @@ japp.load_k2_item = function( id ) {
 	jQuery('#item-featured').val(item.featured).slider('refresh');
 	jQuery('#item-published').val(item.published).slider('refresh');
 	jQuery('#item-text').val( item.introtext + ( item.fulltext ? '<hr id="system-readmore" />' + item.fulltext : '' ) );
-	jQuery('#item-language').val(item.langugae).selectmenu();
+	jQuery('#item-language').val(item.language).selectmenu();
 	jQuery('#item-created-by').val(item.created_by).selectmenu();
 	jQuery('#item-created-by-alias').val(item.created_by_alias);
 	jQuery('#item-access').val(item.access).selectmenu();
