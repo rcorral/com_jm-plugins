@@ -34,6 +34,53 @@ class UsersJMResourceUser extends JMResource
 
 	public function post()
 	{
-		$this->plugin->setResponse( 'here is a post request' );
+		// Set variables to be used
+		JMHelper::setSessionUser();
+
+		JFactory::getLanguage()->load('com_users', JPATH_ADMINISTRATOR);
+
+		// Include dependencies
+		jimport('joomla.application.component.controller');
+		jimport('joomla.form.form');
+		jimport('joomla.database.table');
+
+		JModel::addIncludePath( JPATH_ADMINISTRATOR . '/components/com_users/models' );
+		JForm::addFormPath( JPATH_ADMINISTRATOR . '/components/com_users/models/forms' );
+		JTable::addIncludePath( JPATH_ADMINISTRATOR . '/components/com_users/tables' );
+
+		// Get user data
+		$data = JRequest::getVar( 'jform', array(), 'post', 'array' );
+		if ( !isset( $data['groups'] ) ) {
+			$data['groups'] = array();
+		}
+
+		// Save user
+		$model = JModel::getInstance( 'User', 'UsersModel' );
+		$model->getState('user.id'); // This is only here to trigger populateState()
+		$success = $model->save( $data );
+
+		if ( $model->getError() ) {
+			$response = $this->getErrorResponse( 400, $model->getError() );
+		} elseif ( !$success ) {
+			$response = $this->getErrorResponse( 400, JText::_('COM_JM_ERROR_OCURRED') );
+		} else {
+			$response = $this->getSuccessResponse( 201, JText::_('COM_JM_SUCCESS') );
+			$response->id = $model->getState('user.id');
+		}
+
+		$this->plugin->setResponse( $response );
+	}
+
+	public function put()
+	{	
+		// Simply call post as Joomla will just save an article with an id
+		$this->post();
+
+		$response = $this->plugin->get( 'response' );
+		if ( isset( $response->success ) && $response->success ) {
+			JResponse::setHeader( 'status', 200, true );
+			$response->code = 200;
+			$this->plugin->setResponse( $response );
+		}
 	}
 }
