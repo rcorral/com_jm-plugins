@@ -65,12 +65,52 @@ jQuery('#page-k2-item').live('pagebeforecreate',function(event){
 		}
 
 		japp.load_k2_item( id );
-		item = japp.get_k2_item( id );
 
 		// Set page title
 		jQuery('.page-title').html( 'Edit item' );
 
 		jQuery('#item-delete').css('display', 'block');
+	}
+
+	// Start the loader
+	japp._start_loader();
+	// This needs to be triggered this way, otherwise the device doesn't like it
+	setTimeout('func();', 250);
+	} catch(e){japp._stop_loader();}
+});
+
+jQuery('#page-k2-tags').live('pageshow',function(event){
+	try { // Wrap in try/catch in case there is a JS error, the app won't crash
+	el = jQuery('#k2-tags-list ul');
+	if ( !el.html() ) {
+		japp._start_loader();
+		japp.load_k2_tags();
+	}
+	} catch(e){japp._stop_loader();}
+});
+
+jQuery('#page-k2-tag').live('pageshow',function(event){
+	try {
+	func = function() {
+		id = _gup( 'id' );
+
+		// New tag
+		if ( !id ) {
+			// Stop loader
+			japp._stop_loader();
+
+			// Set page title
+			jQuery('.page-title').html( 'New tag' );
+
+			return;
+		}
+
+		japp.load_k2_tag( id );
+
+		// Set page title
+		jQuery('.page-title').html( 'Edit tag' );
+
+		jQuery('#tag-delete').css('display', 'block');
 	}
 
 	// Start the loader

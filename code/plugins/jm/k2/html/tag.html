@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+	<script type="text/javascript" charset="utf-8" src="../assets/js/loader.js"></script>
+</head>
+<body>
+	<div data-role="page" id="page-k2-tag">
+
+		<div data-role="header" data-theme="b" data-position="fixed">
+			<a href="tags.html" data-rel="back" data-icon="delete">Close</a>
+			<h1 class="page-title"></h1>
+			<a href="javascript:void(0);" data-icon="check" onClick="japp._start_loader('Saving', function(){japp.save_k2_tag();});">Save</a>
+		</div><!-- /header -->
+
+		<div data-role="content">
+			<form action="tag.html" method="post" data-ajax="false" id="k2-tag-form" onSubmit="return false;">
+				<div data-role="fieldcontain">
+					<label for="tag-name">Name:</label>
+				    <input type="text" name="name" id="tag-name" value=""  />
+				</div>
+
+				<div data-role="fieldcontain">
+					<label for="tag-published" class="select">Published:</label>
+					<select name="published" id="tag-published" data-role="slider">
+						<option value="0">NO</option>
+						<option value="1">YES</option>
+					</select> 
+				</div>
+
+				<input type="hidden" name="id" value="" id="tag-id" />
+			</form>
+			<a href="javascript:void(0);" data-role="button" data-theme="e" id="tag-delete" onClick="japp._start_loader('Deleting', function(){japp.delete_k2_tag();});" style="display:none;">Trash</a>
+		</div><!-- /content -->
+	</div><!-- /page -->
+
+</body>
+</html>

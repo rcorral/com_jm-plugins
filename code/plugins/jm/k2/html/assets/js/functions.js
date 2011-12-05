@@ -22,7 +22,7 @@ japp.load_k2_items = function( limitstart, limit, fresh ) {
 		return false;
 	}
 
-	var el = jQuery('#k2-item-list ul');
+	var el = jQuery('#k2-items-list ul');
 	this._started_loading('k2_items'); // Start jquerymobile loader
 
 	// With this we can set a limit to how many items we load till the user scrolls to the bottom of the page
@@ -172,7 +172,9 @@ japp.get_k2_tags = function( fresh ){
 	this._ajax(
 		{
 			app: 'k2',
-			resource: 'tags'
+			resource: 'tags',
+			limit: 999999,
+			limitstart: 0
 		},
 	 	function( data ) {
 			// Try again?
@@ -324,7 +326,7 @@ japp.delete_k2_item = function() {
 	 	function( data ) {
 			japp._stop_loader();
 			if ( data.success ) {
-				jQuery('#k2-item-list ul').html('');
+				jQuery('#k2-items-list ul').html('');
 
 				if ( data.message ) {
 					_alert( data.message, null, 'Success' );
@@ -332,6 +334,176 @@ japp.delete_k2_item = function() {
 
 				japp.clear_cache( 'k2_item', id );
 				jQuery('#page-k2-item .ui-header a:first').trigger('click');
+			} else {
+				_alert( data.message, null, 'Error' );
+			}
+		}, { async: false, type: 'DELETE' });
+}
+
+/* Tags */
+
+japp.add_cache_type('k2_tag', {
+	0: 'k2.tag.{0}',
+	1: 'k2.tags.*'
+});
+
+japp.load_k2_tags = function( limitstart, limit, fresh ) {
+	if ( this._is_loading('k2_tags') ) {
+		return false;
+	}
+
+	var el = jQuery('#k2-tags-list ul');
+	this._started_loading('k2_tags');
+
+	if ( typeof limitstart == 'undefined' ) { limitstart = jQuery(el).attr('g:limitstart') || 0; }
+	if ( typeof limit == 'undefined' ) { limit = 20; }
+
+	var func = function( data ) {
+		jQuery('#ajax-loading-img').remove();
+		jcache.set( context, data, {expiry: date_times.seconds( date_times.hour/2 )} );
+
+		// We reached the end of the tags
+		if ( !data.length ) {
+			japp.unbind_scroll_listener();
+			japp._stopped_loading('k2_tags', true);
+			return;
+		}
+
+		el = jQuery(el);
+
+		// Add each item to lsit
+		jQuery(data).each(function(){
+			state = japp.get_item_state( this.published );
+			jQuery(el).append('<li><a href="tag.html?id=' + this.id + '">'
+				+ '<h3>' + this.name + '</h3>'
+				+ '<p><span class="item-' + state.toLowerCase() + '">' + state + '</span></p>'
+				+ '</a></li>');
+		});
+
+		jQuery(el).listview('refresh').attr('g:limitstart',
+			parseInt( limitstart ) + parseInt( limit ) );
+
+		jQuery(el).append('<li id="ajax-loading-img"><img src="'
+			+ japp.ajax_loader + '" /></li>');
+
+		if ( 0 == limitstart ) {
+			japp.scroll_bottom_listener( '#ajax-loading-img',
+				function(){ japp.load_k2_tags(); } );
+		}
+
+		japp._stopped_loading('k2_tags', true);
+	};
+
+	var context = 'k2.tags.' + limitstart + '.' + limit;
+	if ( japp.cache && !fresh && jcache.get( context ) ) {
+		func( jcache.get( context ) );
+	} else {
+		this._ajax(
+			{
+				app: 'k2',
+				resource: 'tags',
+				limitstart: limitstart,
+				limit: limit
+			}, func );
+	}
+};
+
+japp.load_k2_tag = function( id ) {
+	tag = this.get_k2_tag( id );
+
+	// Populate all article fields
+	jQuery('#tag-name').val(tag.name);
+	jQuery('#tag-published').val(tag.published).slider('refresh');
+	jQuery('#tag-id').val(tag.id);
+
+	this._stop_loader();
+}
+
+japp.get_k2_tag = function( id, fresh ) {
+	var context = 'k2.tag.' + id;
+	if ( japp.cache && !fresh && jcache.get( context ) ) {
+		return jcache.get( context );
+	}
+
+	this._ajax(
+		{
+			app: 'k2',
+			resource: 'tag',
+			cid: id
+		},
+	 	function( data ) {
+			// Try again?
+			if ( japp._object_empty( data ) ) {
+				japp._try_server_request_again( 'get_k2_tag', id,
+				function(){ japp.get_k2_tag( id, fresh ); });
+			} else {
+				jcache.set( context, data );
+			}
+		}, { async: false });
+
+	return jcache.get( context );
+}
+
+japp.save_k2_tag = function( postdata ) {
+	if ( typeof postdata == 'undefined' ) {
+		_data = jQuery('#k2-tag-form').serialize();
+		postdata = jQuery.deparam( _data );
+	}
+
+	// Add defaults
+	postdata.app = 'k2';
+	postdata.resource = 'tag';
+
+	this._ajax(
+		postdata,
+		function( data ) {
+			japp._stop_loader();
+			if ( data.success ) {
+				_alert( data.message, null, 'Success' );
+				jQuery('#tag-id').val(data.id);
+				jQuery('#tag-delete').css('display', 'block');
+
+				japp.clear_cache( 'k2_tag', data.id );
+			} else {
+				_alert( data.message, null, 'Error' );
+			}
+		// Either send the data as POST or PUT use the correct header for creating or updating
+		}, { async: false, type: ( ( postdata.id ) ? 'PUT' : 'POST' ) });
+}
+
+japp.delete_k2_tag = function() {
+	id = jQuery('#tag-id').val();
+
+	if ( !id ) {
+		japp._stop_loader();
+		_alert( 'Tag not found' );
+		return false;
+	}
+
+	var answer = confirm( 'Are you sure you want to delete this tag?' );
+	if ( !answer ) {
+		japp._stop_loader();
+		return false;
+	}
+
+	this._ajax(
+		{
+			app: 'k2',
+			resource: 'tags',
+			task: 'trash',
+			cid: { 0: id }
+		},
+	 	function( data ) {
+			japp._stop_loader();
+			if ( data.success ) {
+				jQuery('#k2-tags-list ul').html('');
+
+				if ( data.message ) {
+					_alert( data.message, null, 'Success' );
+				}
+
+				japp.clear_cache( 'k2_tag', id );
+				jQuery('#page-k2-tag .ui-header a:first').trigger('click');
 			} else {
 				_alert( data.message, null, 'Error' );
 			}
