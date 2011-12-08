@@ -12,7 +12,7 @@ defined('_JEXEC') or die;
 
 jimport('joomla.plugin.plugin');
 
-class K2JMResourceItemForm extends JMResource
+class K2JMResourceFormFields extends JMResource
 {
 	public function get()
 	{
@@ -21,7 +21,7 @@ class K2JMResourceItemForm extends JMResource
 		JFactory::getLanguage()->load( 'com_k2', JPATH_ADMINISTRATOR );
 
 		$form = JForm::getInstance( 'itemForm', JPATH_ADMINISTRATOR
-			. '/components/com_k2/models/item.xml' );
+			. '/components/com_k2/models/' . JRequest::getWord('form') . '.xml' );
 
 		$html = '';
 		foreach ( $form->getFieldset( JRequest::getVar('fieldset') ) as $field ) {
@@ -29,8 +29,10 @@ class K2JMResourceItemForm extends JMResource
 			if( in_array( $field->type, array( 'header', 'Spacer' ) ) ){
 				continue;
 			} else {
+				// Lets make sure the for="" on the label matches the id ont he input
+				preg_match( '/id="(.*?)"/', $field->input, $matches );
 				$html .= '<div data-role="fieldcontain">'
-					. $field->label
+					. preg_replace( '/for="(.*?)"/', 'for="' .$matches[1]. '"', $field->label )
 					. $field->input
 					. '</div>';
 			}
