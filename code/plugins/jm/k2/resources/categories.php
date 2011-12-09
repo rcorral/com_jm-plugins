@@ -48,6 +48,69 @@ class K2JMResourceCategories extends JMResource
 	}
 
 	/**
+	 * This is a modified method from the trash() method in:
+	 * /admin/com_k2/models/categories.php
+	 */
+	public function delete()
+	{
+		$mainframe = &JFactory::getApplication();
+		jimport('joomla.filesystem.file');
+
+		JTable::addIncludePath( JPATH_ADMINISTRATOR . '/components/com_k2/tables' );
+
+		$db = & JFactory::getDBO();
+		$cid = JRequest::getVar('cid');
+		JArrayHelper::toInteger($cid);
+		$row = & JTable::getInstance('K2Category', 'Table');
+
+		$warningItems = false;
+		$warningChildren = false;
+		$cid = array_reverse($cid);
+		for ($i = 0; $i < sizeof($cid); $i++) {
+			$row->load($cid[$i]);
+
+			$query = "SELECT COUNT(*) FROM #__k2_items WHERE catid={$cid[$i]}";
+			$db->setQuery($query);
+			$num = $db->loadResult();
+
+			if ($num > 0 ){
+				$warningItems = true;
+			}
+
+			$query = "SELECT COUNT(*) FROM #__k2_categories WHERE parent={$cid[$i]}";
+			$db->setQuery($query);
+			$children = $db->loadResult();
+
+			if ($children > 0) {
+				$warningChildren = true;
+			}
+
+			if ($children==0 && $num==0){
+
+				if ($row->image) {
+					JFile::delete(JPATH_ROOT.DS.'media'.DS.'k2'.DS.'categories'.DS.$row->image);
+				}
+				$row->delete($cid[$i]);
+
+			}
+		}
+		$cache = & JFactory::getCache('com_k2');
+		$cache->clean();
+
+		if ( $warningItems ){
+			$response = $this->getErrorResponse( 400, JText::_(
+				'PLG_JM_K2_CATEGORY_FAIL_DELETE_ITEMS') );
+		} elseif ( $warningChildren ) {
+			$response = $this->getErrorResponse( 400, JText::_(
+				'PLG_JM_K2_CATEGORY_FAIL_DELETE_CATEGORIES') );
+		} else {
+			$response = $this->getSuccessResponse( 200, JText::_('PLG_JM_K2_CATEGORY_DELETED') );
+		}
+
+		$this->plugin->setResponse( $response );
+	}
+
+	/**
 	 * A copy of the getData method on this file:
 	 * /administrator/components/com_k2/models/categories.php
 	 * Some modifications have been made
