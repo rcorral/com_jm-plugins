@@ -412,13 +412,20 @@ japp.load_k2_tags = function( limitstart, limit, fresh ) {
 
 japp.load_k2_tag = function( id ) {
 	tag = this.get_k2_tag( id );
+	this._stop_loader();
 
 	// Populate all article fields
 	jQuery('#tag-name').val(tag.name);
-	jQuery('#tag-published').val(tag.published).slider('refresh');
+	jQuery('#tag-published').val(tag.published);
 	jQuery('#tag-id').val(tag.id);
 
-	this._stop_loader();
+	try {
+		jQuery('#tag-published').slider('refresh');
+	} catch(e) {
+		try {
+		jQuery('#tag-published').slider();
+		} catch(e) {}
+	}
 }
 
 japp.get_k2_tag = function( id, fresh ) {
