@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="Joomla API Component Package" default="build_package" basedir="code">
-	<property name="component.short" value="api" />
+<project name="Joomla jomMobile Component Package" default="build_package" basedir="code">
+	<property name="component.short" value="jm" />
 	<property name="component.name" value="com_${component.short}" />
-	<property name="component.path" value="../../com_api/code/" />
+	<property name="component.path" value="../../com_jm/code/" />
 	<property name="component.admin_path" value="${component.path}administrator/components/${component.name}" />
 	<property name="component.admin_languages" value="${component.path}administrator/language/en-GB" />
 	<property name="plugins.admin_languages" value="administrator/language/en-GB" />
@@ -63,7 +63,7 @@
 		<copy file="${component.admin_path}/script.php" todir="${package.path}"/>
 		<copy file="${component.admin_path}/${component.short}.xml" todir="${package.path}"/>
 
-		<!-- copy api plugins -->
+		<!-- copy jm plugins -->
 		<copy todir="${package.path}/admin/extensions/plugins">
 			<fileset dir="plugins" />
 		</copy>
@@ -79,8 +79,8 @@
 		<copy todir="${package.path}/admin/extensions/plugins/system">
 			<fileset dir="${component.path}plugins/system" />
 		</copy>
-		<copy file="${component.admin_languages}/en-GB.plg_system_api.ini" todir="${package.path}/admin/extensions/plugins/system/api/language/en-GB" />
-		<copy file="${component.admin_languages}/en-GB.plg_system_api.sys.ini" todir="${package.path}/admin/extensions/plugins/system/api/language/en-GB" />
+		<copy file="${component.admin_languages}/en-GB.plg_system_jm.ini" todir="${package.path}/admin/extensions/plugins/system/jm/language/en-GB" />
+		<copy file="${component.admin_languages}/en-GB.plg_system_jm.sys.ini" todir="${package.path}/admin/extensions/plugins/system/jm/language/en-GB" />
 
 		<zip destfile="${zip.path}/${package.name}" basedir="${package.path}" />
 	</target>

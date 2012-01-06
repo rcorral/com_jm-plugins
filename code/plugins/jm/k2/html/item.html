@@ -1,0 +1,152 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+	<script type="text/javascript" charset="utf-8">
+		var jm_assets = [];
+		jm_assets['css'] = ['assets/css/token-input.css', 'assets/css/token-input-facebook.css'];
+		jm_assets['js'] = ['assets/js/jquery.tokeninput.js'];
+	</script>
+	<script type="text/javascript" charset="utf-8" src="../assets/js/loader.js"></script>
+</head>
+<body>
+	<div data-role="page" id="page-k2-item">
+
+		<div data-role="header" data-theme="b" data-position="fixed">
+			<a href="items.html" data-rel="back" data-icon="delete">Close</a>
+			<h1 class="page-title"></h1>
+			<!-- Add click even for the save button. This will display the loading animation and then execute the callback function to save the item -->
+			<a href="javascript:void(0);" data-icon="check" onClick="japp._start_loader('Saving', function(){japp.save_k2_item();});">Save</a>
+		</div><!-- /header -->
+
+		<div data-role="content">
+			<!-- the onSubmit action must be set to "return false;" otherwise android has a fit" -->
+			<form action="item.html" method="post" data-ajax="false" id="k2-item-form" onSubmit="return false;">
+				<div data-role="fieldcontain">
+					<label for="item-title">Title:</label>
+					<!-- Unique id's are important to avoid conflicts with other parts of your plugin -->
+				    <input type="text" name="title" id="item-title" value=""  />
+				</div>
+
+				<div data-role="fieldcontain">
+					<label for="item-alias">Alias: (auto generated)</label>
+				    <input type="text" name="alias" id="item-alias" value=""  />
+				</div>
+
+				<div data-role="fieldcontain">
+					<label for="item-catid" class="select">Category:</label>
+					<select name="catid" id="item-catid" data-role="none"></select>
+				</div>
+
+				<div data-role="fieldcontain">
+					<label for="item-tags">Tags:</label>
+				    <input type="text" name="tmp-tags" id="item-tags" value=""  />
+				</div>
+
+				<div data-role="fieldcontain">
+					<label for="item-featured" class="select">Featured:</label>
+					<select name="featured" id="item-featured" data-role="slider">
+						<option value="0">NO</option>
+						<option value="1">YES</option>
+					</select> 
+				</div>
+
+				<div data-role="fieldcontain">
+					<label for="item-published" class="select">Published:</label>
+					<select name="published" id="item-published" data-role="slider">
+						<option value="0">NO</option>
+						<option value="1">YES</option>
+					</select> 
+				</div>
+
+				<div data-role="collapsible" data-collapsed="true">
+					<h3>Content</h3>
+						<textarea cols="50" rows="8" name="text" id="item-text"></textarea>
+				</div>
+
+				<div data-role="collapsible" data-collapsed="true">
+					<h3>Author publishing status</h3>
+
+					<div data-role="fieldcontain">
+						<label for="item-language" class="select">Language:</label>
+						<select name="language" id="item-language" data-role="none"></select>
+					</div>
+
+					<div data-role="fieldcontain">
+						<label for="item-created-by">Author:</label>
+						<select name="created_by" id="item-created-by" data-role="none"></select>
+					</div>
+
+					<div data-role="fieldcontain">
+						<label for="item-created-by-alias">Author alias:</label>
+					    <input type="text" name="created_by_alias" id="item-created-by-alias" value=""  />
+					</div>
+
+					<div data-role="fieldcontain">
+						<label for="item-access" class="select">Access Level:</label>
+						<select name="access" id="item-access" data-role="none"></select>
+					</div>
+
+					<div data-role="fieldcontain">
+						<label for="item-created">Creation Date:</label>
+				    	<input type="text" name="created" id="item-created" value=""  />
+					</div>
+
+					<div data-role="fieldcontain">
+						<label for="item-publish-up">Start Publishing:</label>
+				    	<input type="text" name="publish_up" id="item-publish-up" value=""  />
+					</div>
+
+					<div data-role="fieldcontain">
+						<label for="item-publish-down">Finish Publishing:</label>
+				    	<input type="text" name="publish_down" id="item-publish-down" value=""  />
+					</div>
+				</div>
+
+				<div data-role="collapsible" data-collapsed="true">
+					<h3>Metadata Information</h3>
+
+					<div data-role="fieldcontain">
+						<label for="item-metadesc">Description:</label>
+						<textarea cols="50" rows="8" name="metadesc" id="item-metadesc"></textarea>
+					</div>
+
+					<div data-role="fieldcontain">
+						<label for="item-metakey">Keywords:</label>
+						<textarea cols="50" rows="8" name="metakey" id="item-metakey"></textarea>
+					</div>
+
+					<div data-role="fieldcontain">
+						<label for="item-meta-robots">Robots:</label>
+					    <input type="text" name="meta[robots]" id="item-meta-robots" value=""  />
+					</div>
+
+					<div data-role="fieldcontain">
+						<label for="item-meta-author">Author:</label>
+					    <input type="text" name="meta[author]" id="item-meta-author" value=""  />
+					</div>
+				</div>
+
+				<div data-role="collapsible" data-collapsed="true" class="fieldset-item-view-options-listings">
+					<h3>Item view options in category listing</h3>
+
+					<!-- The rest of these input boxes come from a request to the server -->
+				</div>
+
+				<div data-role="collapsible" data-collapsed="true" class="fieldset-item-view-options">
+					<h3>Item view options</h3>
+
+					<!-- The rest of these input boxes come from a request to the server -->
+				</div>
+
+				<input type="hidden" name="id" value="" id="item-id" />
+				<input type="hidden" name="isSite" value="0" id="item-isSite" />
+			</form>
+			<a href="javascript:void(0);" data-role="button" data-theme="e" id="item-delete" onClick="japp._start_loader('Deleting', function(){japp.delete_k2_item();});" style="display:none;">Trash</a>
+		</div><!-- /content -->
+	</div><!-- /page -->
+
+</body>
+</html>

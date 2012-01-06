@@ -1,0 +1,106 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+	<script type="text/javascript" charset="utf-8" src="../assets/js/loader.js"></script>
+</head>
+<body>
+	<div data-role="page" id="page-k2-category">
+
+		<div data-role="header" data-theme="b" data-position="fixed">
+			<a href="categories.html" data-rel="back" data-icon="delete">Close</a>
+			<h1 class="page-title"></h1>
+			<a href="javascript:void(0);" data-icon="check" onClick="japp._start_loader('Saving', function(){japp.save_k2_category();});">Save</a>
+		</div><!-- /header -->
+
+		<div data-role="content">
+			<form action="category.html" method="post" data-ajax="false" id="k2-category-form" onSubmit="return false;">
+				<div data-role="fieldcontain">
+					<label for="category-name">Title:</label>
+				    <input type="text" name="name" id="category-name" value=""  />
+				</div>
+
+				<div data-role="fieldcontain">
+					<label for="category-alias">Alias: (auto generated)</label>
+				    <input type="text" name="alias" id="category-alias" value=""  />
+				</div>
+
+				<div data-role="fieldcontain">
+					<label for="category-parent" class="select">Parent category:</label>
+					<select name="parent" id="category-parent" data-role="none"></select>
+				</div>
+
+				<div data-role="fieldcontain">
+					<label for="params_inheritFrom" class="select">Inherit parameter options from category:</label>
+					<select name="params[inheritFrom]" id="params_inheritFrom" data-role="none"></select>
+				</div>
+
+				<div data-role="fieldcontain">
+					<label for="category-extraFieldsGroup">Associated "Extra Fields Group":</label>
+				    <select name="extraFieldsGroup" id="category-extraFieldsGroup" data-role="none"></select>
+				</div>
+
+				<div data-role="fieldcontain">
+					<label for="category-published" class="select">Published:</label>
+					<select name="published" id="category-published" data-role="slider">
+						<option value="0">NO</option>
+						<option value="1">YES</option>
+					</select> 
+				</div>
+
+				<div data-role="fieldcontain">
+					<label for="category-access" class="select">Access:</label>
+					<select name="access" id="category-access" data-role="none"></select>
+				</div>
+
+				<div data-role="fieldcontain">
+					<label for="category-language" class="select">Language:</label>
+					<select name="language" id="category-language" data-role="none"></select>
+				</div>
+
+				<div data-role="collapsible" data-collapsed="true">
+					<h3>Description</h3>
+					<textarea cols="50" rows="8" name="text" id="category-description"></textarea>
+				</div>
+
+				<div data-role="collapsible" data-collapsed="true" class="fieldset-category-item-layout">
+					<h3>Category item layout</h3>
+					<!-- The rest of these input fields come from a request to the server -->
+				</div>
+
+				<div data-role="collapsible" data-collapsed="true" class="fieldset-category-view-options">
+					<h3>Category view options</h3>
+					<!-- The rest of these input fields come from a request to the server -->
+				</div>
+
+				<div data-role="collapsible" data-collapsed="true" class="fieldset-item-image-options">
+					<h3>Item image options</h3>
+					<!-- The rest of these input fields come from a request to the server -->
+				</div>
+
+				<div data-role="collapsible" data-collapsed="true" class="fieldset-item-view-options-listings">
+					<h3>Item view options in category listings</h3>
+					<!-- The rest of these input fields come from a request to the server -->
+				</div>
+
+				<div data-role="collapsible" data-collapsed="true" class="fieldset-item-view-options">
+					<h3>Item view options</h3>
+					<!-- The rest of these input fields come from a request to the server -->
+				</div>
+
+				<div data-role="collapsible" data-collapsed="true" class="fieldset-category-metadata-information">
+					<h3>Metadata Information</h3>
+					<!-- The rest of these input fields come from a request to the server -->
+				</div>
+
+				<input type="hidden" name="id" value="" id="category-id" />
+				<input type="hidden" name="isSite" value="0" id="category-isSite" />
+			</form>
+			<a href="javascript:void(0);" data-role="button" data-theme="e" id="category-delete" onClick="japp._start_loader('Deleting', function(){japp.delete_k2_category();});" style="display:none;">Trash</a>
+		</div><!-- /content -->
+	</div><!-- /page -->
+
+</body>
+</html>
