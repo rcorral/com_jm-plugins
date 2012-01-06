@@ -3,10 +3,10 @@
 	<name>plg_jm_core</name>
 	<version>1.0</version>
 	<creationDate>November 2010</creationDate>
-	<author>Brian Edgerton</author>
-	<authorEmail>brian@edgewebworks.com</authorEmail>
-	<authorUrl>http://www.edgewebworks.com</authorUrl>
-	<copyright>2010 Edge Web Works, LLC</copyright>
+	<author>Rafael Corral</author>
+	<authorEmail>contact@jommobile.com</authorEmail>
+	<authorUrl>http://jommobile.com</authorUrl>
+	<copyright>2012 Rafael Corral</copyright>
 	<license>GNU General Public License v2</license>
 	<description>PLG_JM_CORE_XML_DESCRIPTION</description>
 

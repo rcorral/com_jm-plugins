@@ -1,10 +1,10 @@
 <?php
 /**
  * @package	JM
- * @version 1.5
+ * @version 0.2
  * @author 	Rafael Corral
- * @link 	http://www.rafaelcorral.com
- * @copyright Copyright (C) 2011 Edge Web Works, LLC. All rights reserved.
+ * @link 	http://jommobile.com
+ * @copyright Copyright (C) 2012 Rafael Corral. All rights reserved.
  * @license http://www.gnu.org/copyleft/gpl.html GNU/GPL, see LICENSE.php
  */
 
